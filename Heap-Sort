@@ -1,0 +1,37 @@
+void Maxsort(int a[],int n,int index)
+{
+    int left=index*2+1,right=index*2+2;
+    int max_son=index;
+    int temp=a[index];
+    while(left<n)
+    {
+        if(a[left]<a[right] && right<n)
+            max_son=right;
+        else
+            max_son=left;
+        if(temp<a[max_son])
+        {
+            a[index]=a[max_son];
+            index=max_son;
+            left=max_son*2+1;
+            right=max_son*2+2;
+        }
+        else
+        {
+            a[index]=temp;
+            return;
+        }
+    }
+    a[max_son]=temp;
+}
+
+void Heapsort(int a[],int n)
+{
+    for(int i=(n-1)/2;i>=0;i--)
+        Maxsort(a,n,i);
+    for(int i=n-1;i>0;i--)
+    {
+        swap(a[i],a[0]);
+        Maxsort(a,i,0);
+    }
+}
